@@ -20,7 +20,7 @@ export function DesktopNav() {
       <div className="flex h-20 items-center justify-center border-b px-6">
         <Link href="/" className="flex items-center gap-2">
           <Clapperboard className="h-8 w-8 text-primary" />
-          <span className="font-headline text-2xl font-bold">StudioVerse</span>
+          <span className="font-headline text-2xl font-bold">OnlyStudio</span>
         </Link>
       </div>
       <nav className="flex-1 space-y-2 p-4">
