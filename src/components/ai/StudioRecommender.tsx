@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 import { getAIRecommendations } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,7 +10,6 @@ import { Label } from '../ui/label';
 import { Sparkles } from 'lucide-react';
 import { StudioCard } from '../shared/StudioCard';
 import type { Studio } from '@/lib/types';
-import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 const initialState = {
@@ -28,7 +28,7 @@ function SubmitButton() {
 }
 
 export function StudioRecommender() {
-  const [state, formAction] = useFormState(getAIRecommendations, initialState);
+  const [state, formAction] = useActionState(getAIRecommendations, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
