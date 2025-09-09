@@ -16,7 +16,7 @@ const StudioRecommendationInputSchema = z.object({
     .describe('The user preferences for studios (e.g., photography, music, dance).'),
   studioProfiles: z
     .string()
-    .describe('A description of available studio profiles, including type, location, and amenities.'),
+    .describe('A description of available studio profiles, including type, location, and amenities. Each studio has an ID.'),
 });
 export type StudioRecommendationInput = z.infer<
   typeof StudioRecommendationInputSchema
@@ -24,7 +24,7 @@ export type StudioRecommendationInput = z.infer<
 
 const StudioRecommendationOutputSchema = z.object({
   recommendations: z
-    .string()
+    .array(z.object({ id: z.string().describe("The ID of the recommended studio.") }))
     .describe('A list of recommended studios based on user preferences.'),
   reasoning: z
     .string()
@@ -44,7 +44,13 @@ const prompt = ai.definePrompt({
   name: 'studioRecommendationPrompt',
   input: {schema: StudioRecommendationInputSchema},
   output: {schema: StudioRecommendationOutputSchema},
-  prompt: `You are an AI assistant designed to provide personalized studio recommendations based on user preferences and studio profiles.\n\nUser Preferences: {{{userPreferences}}}\nStudio Profiles: {{{studioProfiles}}}\n\nBased on the user preferences and the available studio profiles, provide a list of recommended studios and explain the reasoning behind your recommendations.\n\nRecommendations: \nReasoning: `,
+  prompt: `You are an AI assistant designed to provide personalized studio recommendations based on user preferences and studio profiles.
+
+User Preferences: {{{userPreferences}}}
+Studio Profiles: {{{studioProfiles}}}
+
+Based on the user preferences and the available studio profiles, provide a list of recommended studios and explain the reasoning behind your recommendations. Only return the IDs of the recommended studios.
+`,
 });
 
 const studioRecommendationFlow = ai.defineFlow(

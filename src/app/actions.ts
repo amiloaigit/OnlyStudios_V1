@@ -9,7 +9,7 @@ const schema = z.object({
 });
 
 export async function getAIRecommendations(prevState: any, formData: FormData): Promise<{
-    recommendations: StudioRecommendationOutput | null,
+    recommendations: { recommendations: string, reasoning: string | undefined } | null,
     error: string | null
 }> {
   const validatedFields = schema.safeParse({
@@ -29,7 +29,7 @@ export async function getAIRecommendations(prevState: any, formData: FormData): 
     const studioProfiles = studios
       .map(
         (s) =>
-          `Studio: ${s.name}, Type: ${s.type}, Location: ${s.location}, Price: $${s.price}/hr, Amenities: ${s.amenities.join(', ')}`
+          `Studio ID: ${s.id}, Name: ${s.name}, Type: ${s.type}, Location: ${s.location}, Price: $${s.price}/hr, Amenities: ${s.amenities.join(', ')}`
       )
       .join('\n');
 
@@ -39,17 +39,14 @@ export async function getAIRecommendations(prevState: any, formData: FormData): 
     });
     
     // Find the full studio objects for the recommended studios
-    const recommendedStudioNames = result.recommendations
-      .split('\n')
-      .map(line => line.replace(/- /g, '').trim())
-      .filter(name => name.length > 0);
+    const recommendedStudioIds = result.recommendations.map(r => r.id);
       
-    const recommendedStudios = recommendedStudioNames
-      .map(name => studios.find(s => s.name.toLowerCase() === name.toLowerCase()))
+    const recommendedStudios = recommendedStudioIds
+      .map(id => studios.find(s => s.id === id))
       .filter(Boolean);
 
     return {
-        recommendations: { ...result, recommendations: JSON.stringify(recommendedStudios) }, // Pass studio objects as JSON
+        recommendations: { ...result, recommendations: JSON.stringify(recommendedStudios) },
         error: null
     };
   } catch (error) {

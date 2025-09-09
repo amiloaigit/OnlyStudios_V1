@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useMemo } from 'react';
 import { useFormStatus } from 'react-dom';
 import { getAIRecommendations } from '@/app/actions';
 import { Button } from '@/components/ui/button';
@@ -41,7 +41,15 @@ export function StudioRecommender() {
     }
   }, [state.error, toast]);
 
-  const recommendedStudios: Studio[] = state.recommendations ? JSON.parse(state.recommendations.recommendations) : [];
+  const recommendedStudios: Studio[] = useMemo(() => {
+    if (!state.recommendations?.recommendations) return [];
+    try {
+      return JSON.parse(state.recommendations.recommendations);
+    } catch (e) {
+      console.error("Failed to parse recommendations:", e);
+      return [];
+    }
+  }, [state.recommendations]);
 
   return (
     <Card className="shadow-lg">
