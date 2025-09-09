@@ -24,7 +24,8 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 
   const renderNav = () => {
     if (!mounted) {
-      // Render desktop nav on server and initial client render to avoid mismatch
+      // On the server or during initial client render, always render DesktopNav 
+      // to prevent a hydration mismatch.
       return <DesktopNav />;
     }
     return isMobile ? <MobileNav /> : <DesktopNav />;
