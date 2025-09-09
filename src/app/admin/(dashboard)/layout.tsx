@@ -9,7 +9,7 @@ import {
   SidebarTrigger,
   SidebarInset,
 } from '@/components/ui/sidebar';
-import { Home, LayoutGrid, Settings } from 'lucide-react';
+import { Home, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminLayout({

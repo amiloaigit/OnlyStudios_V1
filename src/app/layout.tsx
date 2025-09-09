@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { AppLayout } from '@/components/layout/AppLayout';
+import { MainLayout } from '@/components/layout/MainLayout';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
@@ -22,9 +22,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <AppLayout>
+        <MainLayout>
           {children}
-        </AppLayout>
+        </MainLayout>
         <Toaster />
       </body>
     </html>
