@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -41,7 +42,7 @@ function SubmitButton() {
 }
 
 export function StudioForm() {
-  const [state, formAction] = useFormState(createStudio, undefined);
+  const [state, formAction] = useActionState(createStudio, undefined);
   const { toast } = useToast();
 
   useEffect(() => {
