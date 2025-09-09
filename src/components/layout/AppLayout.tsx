@@ -14,9 +14,6 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  // This prevents a hydration mismatch by ensuring that the server and client render the same initial layout.
-  // The client will then re-render with the correct layout after mounting.
-  // Returning null or a loading spinner until mounted is a common pattern to avoid hydration errors.
   if (!mounted) {
     return (
         <div className="flex min-h-screen w-full bg-background">
