@@ -1,3 +1,6 @@
+'use client';
+
+import { useFormState, useFormStatus } from 'react-dom';
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,8 +12,33 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { authenticateAdmin } from '@/app/actions';
+import { useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
+
+function LoginButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" className="w-full" disabled={pending}>
+      {pending ? 'Logging in...' : 'Login'}
+    </Button>
+  );
+}
 
 export default function AdminLoginPage() {
+  const [state, formAction] = useFormState(authenticateAdmin, undefined);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (state?.error) {
+      toast({
+        title: 'Login Failed',
+        description: state.error,
+        variant: 'destructive',
+      });
+    }
+  }, [state, toast]);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-muted/40">
        <Card className="mx-auto max-w-sm">
@@ -21,25 +49,23 @@ export default function AdminLoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4">
+          <form action={formAction} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="username">Username or Mobile Number</Label>
-              <Input id="username" type="text" placeholder="admin_user" required />
+              <Input id="username" name="username" type="text" placeholder="admin" required />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" required />
+              <Input id="password" name="password" type="password" required />
             </div>
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
+            <LoginButton />
             <div className="mt-4 text-center text-sm">
               Not an admin?{" "}
               <Link href="/login" className="underline">
                 User login
               </Link>
             </div>
-          </div>
+          </form>
         </CardContent>
       </Card>
     </div>

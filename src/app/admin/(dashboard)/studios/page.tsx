@@ -25,8 +25,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
+import { getStudios } from '@/app/actions';
 
-export default function ManageStudiosPage() {
+export default async function ManageStudiosPage() {
+  const allStudios = await getStudios();
   return (
     <Card>
       <CardHeader>
@@ -59,7 +61,7 @@ export default function ManageStudiosPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {studios.map((studio) => (
+            {allStudios.map((studio) => (
               <TableRow key={studio.id}>
                 <TableCell className="font-medium">{studio.name}</TableCell>
                 <TableCell>

@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -18,22 +19,19 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  if (noNavRoutes.includes(pathname)) {
+  const shouldShowNav = !noNavRoutes.includes(pathname);
+
+  if (!shouldShowNav) {
     return <>{children}</>;
   }
-
-  const renderNav = () => {
-    // On the server or during initial client render, we don't render the mobile nav
-    // to prevent a hydration mismatch.
-    if (!mounted) {
-      return <DesktopNav />;
-    }
-    return isMobile ? <MobileNav /> : <DesktopNav />;
-  };
-
+  
   return (
     <div className="flex min-h-screen w-full bg-background">
-      {renderNav()}
+      {mounted ? (
+        isMobile ? <MobileNav /> : <DesktopNav />
+      ) : (
+        <DesktopNav /> // Render desktop nav on server and initial client render
+      )}
       <main className="flex-1 md:pl-64">
         <div className="h-full pb-20 md:pb-0">
           {children}
