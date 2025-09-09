@@ -14,22 +14,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return (
-        <div className="flex min-h-screen w-full bg-background">
-            <DesktopNav />
-             <main className="flex-1 md:pl-64">
-                <div className="h-full pb-20 md:pb-0">
-                {children}
-                </div>
-            </main>
-        </div>
-    );
-  }
-
   return (
     <div className="flex min-h-screen w-full bg-background">
-      {isMobile ? <MobileNav /> : <DesktopNav />}
+      {mounted ? (isMobile ? <MobileNav /> : <DesktopNav />) : <DesktopNav />}
       <main className="flex-1 md:pl-64">
         <div className="h-full pb-20 md:pb-0">
           {children}
