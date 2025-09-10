@@ -40,9 +40,9 @@ export default function AmenitiesSetupPage() {
     };
 
     const handleNext = () => {
-        // In a real app, save state and navigate to the next step
-        // router.push('/studios/setup/photos');
+        // In a real app, save state
         console.log("Selected Amenities:", selectedAmenities);
+        router.push('/studios/setup/equipment');
     };
     
     const handlePrevious = () => {
