@@ -1,5 +1,8 @@
+
 'use client';
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { User, Home, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,10 +10,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
 export default function SignupPage() {
     const [role, setRole] = useState('creator');
+    const router = useRouter();
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // In a real app, you would handle form submission to your backend here.
+        
+        if (role === 'owner') {
+            router.push('/studios/setup');
+        } else {
+            // Redirect creators to the main page or discover page
+            router.push('/');
+        }
+    };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-4 font-body">
@@ -31,18 +46,18 @@ export default function SignupPage() {
           </Button>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
+            <Input id="email" type="email" placeholder="Enter your email" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="Create a password" />
+            <Input id="password" type="password" placeholder="Create a password" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="confirm-password">Confirm Password</Label>
-            <Input id="confirm-password" type="password" placeholder="Confirm your password" />
+            <Input id="confirm-password" type="password" placeholder="Confirm your password" required />
           </div>
 
           <div className="space-y-2 pt-2">
