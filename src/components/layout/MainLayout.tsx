@@ -1,6 +1,4 @@
-
-
-"use client";
+'use client';
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DesktopNav } from "./DesktopNav";
@@ -8,7 +6,7 @@ import { MobileNav } from "./MobileNav";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const noNavRoutes = ["/login", "/admin/login"];
+const noNavRoutes = ["/login", "/signup", "/admin/login"];
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();

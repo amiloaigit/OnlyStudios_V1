@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Clapperboard, Home, Search, User, Compass } from 'lucide-react';
+import { Clapperboard, Home, User, Compass, UserPlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -10,6 +10,7 @@ const navItems = [
   { href: '/discover', icon: Compass, label: 'Discover' },
   { href: '/reels', icon: Clapperboard, label: 'Reels' },
   { href: '/profile', icon: User, label: 'Profile' },
+  { href: '/signup', icon: UserPlus, label: 'Sign Up' },
 ];
 
 export function DesktopNav() {

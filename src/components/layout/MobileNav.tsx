@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Clapperboard, Home, Search, User, Compass } from 'lucide-react';
+import { Clapperboard, Home, User, Compass, UserPlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -10,6 +10,7 @@ const navItems = [
   { href: '/discover', icon: Compass, label: 'Discover' },
   { href: '/reels', icon: Clapperboard, label: 'Reels' },
   { href: '/profile', icon: User, label: 'Profile' },
+  { href: '/signup', icon: UserPlus, label: 'Sign Up' },
 ];
 
 export function MobileNav() {
@@ -17,7 +18,7 @@ export function MobileNav() {
 
   return (
     <nav className="fixed bottom-0 z-10 w-full border-t bg-card/95 backdrop-blur-sm md:hidden">
-      <div className="grid h-16 grid-cols-4 items-center">
+      <div className="grid h-16 grid-cols-5 items-center">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
