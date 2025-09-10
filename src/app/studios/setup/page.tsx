@@ -1,4 +1,7 @@
 
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +10,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 
 export default function StudioSetupPage() {
+    const router = useRouter();
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // In a real app, you would save the form data to a state management solution
+        // or pass it via query params. For now, we just navigate.
+        router.push('/studios/setup/amenities');
+    };
+
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4 font-body">
             <div className="text-center mb-4 absolute top-4">
@@ -22,23 +34,23 @@ export default function StudioSetupPage() {
                 </header>
 
                 <main>
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <h2 className="text-xl font-semibold mb-4">Basic Information</h2>
                         <div className="space-y-2">
                             <Label htmlFor="studio-name">Studio Name *</Label>
-                            <Input id="studio-name" placeholder="Enter your studio name" />
+                            <Input id="studio-name" placeholder="Enter your studio name" required />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="address">Address *</Label>
-                            <Textarea id="address" placeholder="" className="min-h-24"/>
+                            <Textarea id="address" placeholder="" className="min-h-24" required />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="description">Description *</Label>
-                            <Textarea id="description" placeholder="" className="min-h-24"/>
+                            <Textarea id="description" placeholder="" className="min-h-24" required />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="studio-type">Studio Type *</Label>
-                            <Select>
+                            <Select required>
                                 <SelectTrigger id="studio-type">
                                     <SelectValue placeholder="Select studio type" />
                                 </SelectTrigger>
