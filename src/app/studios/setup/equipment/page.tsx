@@ -28,7 +28,7 @@ export default function EquipmentSetupPage() {
     const handleNext = () => {
         // In a real app, save state
         console.log("Equipment List:", equipmentList);
-        router.push('/studios/setup/photos');
+        router.push('/studios/setup/pricing');
     };
 
     const handlePrevious = () => {

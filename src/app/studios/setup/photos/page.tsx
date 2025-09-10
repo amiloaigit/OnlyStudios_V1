@@ -10,8 +10,9 @@ export default function PhotosSetupPage() {
     const router = useRouter();
 
     const handleNext = () => {
-        // In a real app, save state
-        // router.push('/studios/setup/pricing');
+        // In a real app, this would be the final step, submitting all data.
+        // For now, we'll just redirect to the homepage.
+        router.push('/');
     };
     
     const handlePrevious = () => {
@@ -28,8 +29,8 @@ export default function PhotosSetupPage() {
                 <header className="mb-8">
                     <h1 className="text-2xl font-bold">Studio Setup</h1>
                     <div className="flex items-center gap-4 mt-2">
-                        <Progress value={80} className="w-full" />
-                        <span className="text-sm text-muted-foreground font-semibold whitespace-nowrap">Step 4 of 5</span>
+                        <Progress value={100} className="w-full" />
+                        <span className="text-sm text-muted-foreground font-semibold whitespace-nowrap">Step 5 of 5</span>
                     </div>
                 </header>
 
@@ -57,7 +58,7 @@ export default function PhotosSetupPage() {
 
                         <div className="flex justify-between pt-4">
                             <Button variant="outline" onClick={handlePrevious}>Previous</Button>
-                            <Button onClick={handleNext} style={{backgroundColor: '#A78BFA', color: 'white'}}>Next Step</Button>
+                            <Button onClick={handleNext} style={{backgroundColor: '#A78BFA', color: 'white'}}>Finish Setup</Button>
                         </div>
                     </div>
                 </main>
