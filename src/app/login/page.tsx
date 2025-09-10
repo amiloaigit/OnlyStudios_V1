@@ -66,6 +66,12 @@ export default function LoginPage() {
             </div>
             <LoginButton />
             <div className="mt-4 text-center text-sm">
+              Don't have an account?{" "}
+              <Link href="/signup" className="underline">
+                Sign up
+              </Link>
+            </div>
+            <div className="mt-2 text-center text-sm">
               Are you an admin?{" "}
               <Link href="/admin/login" className="underline">
                 Login here
